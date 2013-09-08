@@ -48,7 +48,7 @@ _pass()
 {
 	COMPREPLY=()
 	local cur="${COMP_WORDS[COMP_CWORD]}"
-	local commands="init ls show insert generate edit rm git help version"
+	local commands="init ls show cat insert generate edit rm git help version"
 	if [[ $COMP_CWORD -gt 1 ]]; then
 		case "${COMP_WORDS[1]}" in
 			init)
@@ -58,7 +58,7 @@ _pass()
 			ls|list|edit)
 				_pass_complete_entries
 				;;
-			show|-*)
+			show|cat|-*)
 				COMPREPLY+=($(compgen -W "-c --clip" -- ${cur}))
 				_pass_complete_entries 1
 				;;
