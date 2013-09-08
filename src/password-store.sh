@@ -43,7 +43,7 @@ Usage:
         the password back. Or, optionally, it may be multiline. Prompt
         before overwriting existing password unless forced.
     $program edit pass-name
-        Insert a new password or edit an existing password using ${EDITOR:-vi}.
+        Insert a new password or edit an existing password using ${PASS_EDITOR:-vi}.
     $program generate [--no-symbols,-n] [--clip,-c] [--force,-f] pass-name pass-length
         Generate a new password of pass-length with optionally no symbols.
         Optionally put it on the clipboard and clear board after 45 seconds.
@@ -298,12 +298,12 @@ case "$command" in
 			gpg2 -d -o "$tmp_file" $GPG_OPTS "$passfile" || exit 1
 			action="Edited"
 		fi
-		${EDITOR:-vi} "$tmp_file"
+		${PASS_EDITOR:-vi} "$tmp_file"
 		while ! gpg2 -e -r "$ID" -o "$passfile" $GPG_OPTS "$tmp_file"; do
 			echo "GPG encryption failed. Retrying."
 			sleep 1
 		done
-		git_add_file "$passfile" "$action password for $path using ${EDITOR:-vi}."
+		git_add_file "$passfile" "$action password for $path using ${PASS_EDITOR:-vi}."
 		;;
 	generate)
 		clip=0
