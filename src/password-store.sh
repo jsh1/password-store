@@ -63,7 +63,7 @@ _EOF
 }
 is_command() {
 	case "$1" in
-		init|ls|list|show|insert|edit|generate|remove|rm|delete|git|help|--help|version|--version) return 0 ;;
+		init|ls|list|show|cat|insert|edit|generate|remove|rm|delete|git|help|--help|version|--version) return 0 ;;
 		*) return 1 ;;
 	esac
 }
@@ -190,7 +190,7 @@ else
 fi
 
 case "$command" in
-	show|ls|list)
+	show|ls|list|cat)
 		clip=0
 
 		opts="$($GETOPT -o c -l clip -n "$program" -- "$@")"
